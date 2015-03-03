@@ -89,36 +89,18 @@
      EXPERIMENT."NAME" AS EXPERIMENT_NAME,
      EXPERIMENTSUITE."NAME" AS EXPERIMENTSUITE_NAME,
      SYSTEM."NAME" AS SYSTEM_NAME,
-     ExperimentRun."DEPLOYED" AS ExperimentRun_DEPLOYED,
-     ExperimentRun."FINISHED" AS ExperimentRun_FINISHED,
-     DATEDIFF(millisecond, ExperimentRun."DEPLOYED", ExperimentRun."FINISHED") As Runtime,
-     (
-         SELECT @rownum:=@rownum+1 as row_number, DATEDIFF(millisecond, ExperimentRun."DEPLOYED", ExperimentRun."FINISHED") As Runtime
-         FROM "EXPERIMENTRUN" ExperimentRun, (SELECT @rownum:=0) r
-         WHERE 1
-         Order By Runtime
-     ) as t1,
-     (
-     SELECT count(*) as total_rows
-     FROM "EXPERIMENTRUN" ExperimentRun
-     WHERE 1
-     ) as t2
+     EXPERIMENT."MEDIANEXPERIMENTRUNTIME" AS EXPERIMENT_MEDIANEXPERIMENTRUNTIME,
+     EXPERIMENT."AVERAGEEXPERIMENTRUNTIME" AS EXPERIMENT_AVERAGEEXPERIMENTRUNTIME
 FROM
-     "EXPERIMENTRUN" ExperimentRun LEFT OUTER JOIN "EXPERIMENT" EXPERIMENT ON EXPERIMENT."EXPERIMENTID" = ExperimentRun."EXPERIMENTRUNSET_EXPERIMENTID"
-     LEFT OUTER JOIN "SYSTEM" SYSTEM ON EXPERIMENT."EXPERIMENTSET_SYSTEMID" = SYSTEM."SYSTEMID"
-     LEFT OUTER JOIN "EXPERIMENTSUITE" EXPERIMENTSUITE ON EXPERIMENT."EXPERIMENTSET_EXPERIMENTSUITEID" = EXPERIMENTSUITE."EXPERIMENTSUITEID"
-WHERE 1
-     AND t1.row_number in (floor((total_rows+1)/2), floor((total_rows+2)/2) ) AND
-     EXPERIMENT.NAME LIKE '%men14%'
- AND ExperimentSuite.name LIKE '%200G%']]>
+     "EXPERIMENT" EXPERIMENT LEFT OUTER JOIN "EXPERIMENTRUN" ExperimentRun ON EXPERIMENT."EXPERIMENTID" = ExperimentRun."EXPERIMENTRUNSET_EXPERIMENTID"
+     RIGHT OUTER JOIN "SYSTEM" SYSTEM ON EXPERIMENT."SYSTEM_SYSTEMID" = SYSTEM."SYSTEMID"
+     RIGHT OUTER JOIN "EXPERIMENTSUITE" EXPERIMENTSUITE ON EXPERIMENT."EXPERIMENTSUITE_EXPERIMENTSUITEID" = EXPERIMENTSUITE."EXPERIMENTSUITEID"]]>
 		</queryString>
 		<field name="EXPERIMENT_NAME" class="java.lang.String"/>
 		<field name="EXPERIMENTSUITE_NAME" class="java.lang.String"/>
 		<field name="SYSTEM_NAME" class="java.lang.String"/>
-		<field name="EXPERIMENTRUN_DEPLOYED" class="java.sql.Timestamp"/>
-		<field name="EXPERIMENTRUN_FINISHED" class="java.sql.Timestamp"/>
-		<field name="RUNTIME" class="java.lang.Long"/>
-		<field name="T2" class="java.lang.Long"/>
+		<field name="EXPERIMENT_MEDIANEXPERIMENTRUNTIME" class="java.lang.Long"/>
+		<field name="EXPERIMENT_AVERAGEEXPERIMENTRUNTIME" class="java.lang.Long"/>
 	</subDataset>
 	<subDataset name="EventRunFixDop=320" uuid="381d5db7-f4a5-42be-b955-a7323843e17d">
 		<queryString>
