@@ -16,6 +16,7 @@ import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import eu.stratosphere.peel.core.cli.command.Command;
@@ -28,7 +29,7 @@ public class Peel {
         // load available commands
         HashMap<String, Command> commands = new HashMap<>();
         Reflections.log = null; // disable reflections log
-        Reflections reflections = new Reflections("eu.stratosphere.peel.core.cli.command");
+        Reflections reflections = new Reflections("eu.stratosphere.peel");
         for (Class<? extends Command> clazz : reflections.getSubTypesOf(Command.class)) {
             try {
                 // create command instance
@@ -89,7 +90,7 @@ public class Peel {
 
             // 3) construct application context
             //@formatter:off
-            AbstractApplicationContext context = new FileSystemXmlApplicationContext((null != System.getProperty("app.path.fixtures"))
+            AbstractApplicationContext context = new ClassPathXmlApplicationContext((null != System.getProperty("app.path.fixtures"))
                     ? new String[] {"classpath:peel-core.xml", "classpath:peel-extensions.xml", "file:" + System.getProperty("app.path.fixtures")}
                     : new String[] {"classpath:peel-core.xml", "classpath:peel-extensions.xml"});
             context.registerShutdownHook();
@@ -104,8 +105,10 @@ public class Peel {
             System.exit(-1);
         } catch (Throwable e) {
             System.err.println(String.format("Unexpected error: %s", e.getMessage()));
+            e.printStackTrace();
             System.exit(-1);
         }
+        System.exit(0);
     }
 
     private static ArgumentParser getArgumentParser() {
