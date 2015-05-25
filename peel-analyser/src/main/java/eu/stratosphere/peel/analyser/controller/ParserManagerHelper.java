@@ -12,6 +12,12 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.util.Arrays;
+import eu.stratosphere.peel.analyser.util.ORMUtil;
+import eu.stratosphere.peel.analyser.util.QueryParameter;
+import org.hibernate.Session;
+import org.json.JSONObject;
+
+import java.io.File;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -201,16 +207,17 @@ class ParserManagerHelper {
    * @param filename of the file you want to know if it's the jobmanager logfile
    * @return true if this is the jobmanager logfile, false if not
    */
-  protected static boolean isJobmanager(String filename, String system) {
+  protected static boolean isJobmanager(String filename, String system){
     Pattern pattern = null;
-    if (system.equals("flink")) {
-      pattern = Pattern
-		      .compile("([A-z0-9-])+(-jobmanager-)([A-z0-9-])+(?=.log)");
-    } else if (system.equals("spark")) {
-      pattern = Pattern.compile("EVENT_LOG_1");
+    Pattern sparkOld = Pattern.compile("EVENT_LOG_1");
+    if(system.equals("flink")) {
+      pattern = Pattern.compile("([A-z0-9-])+(-jobmanager-)([A-z0-9-])+(?=.log)");
+    } else if(system.equals("spark")){
+      pattern = Pattern.compile("app-*");
     }
     Matcher matcher = pattern.matcher(filename);
-    return matcher.find();
+    Matcher sparkOldMatcher = sparkOld.matcher(filename);
+    return matcher.find() || sparkOldMatcher.find();
   }
 
   /**

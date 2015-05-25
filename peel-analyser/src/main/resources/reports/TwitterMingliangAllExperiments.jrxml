@@ -2,7 +2,11 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TestReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="98d0a932-114d-4e4c-b641-a9234f3e4457">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
+<<<<<<< HEAD
 	<property name="ireport.y" value="0"/>
+=======
+	<property name="ireport.y" value="101"/>
+>>>>>>> remotes/origin/master
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -89,6 +93,7 @@
      EXPERIMENT."NAME" AS EXPERIMENT_NAME,
      EXPERIMENTSUITE."NAME" AS EXPERIMENTSUITE_NAME,
      SYSTEM."NAME" AS SYSTEM_NAME,
+<<<<<<< HEAD
      EXPERIMENT."MEDIANEXPERIMENTRUNTIME" AS EXPERIMENT_MEDIANEXPERIMENTRUNTIME,
      EXPERIMENT."AVERAGEEXPERIMENTRUNTIME" AS EXPERIMENT_AVERAGEEXPERIMENTRUNTIME,
      Substring(ExperimentSuite.Name, 10, Length(ExperimentSuite.Name) - 15) as DatasetName,
@@ -102,15 +107,27 @@ FROM
      "EXPERIMENT" EXPERIMENT RIGHT OUTER JOIN "SYSTEM" SYSTEM ON EXPERIMENT."SYSTEM_SYSTEMID" = SYSTEM."SYSTEMID"
      RIGHT OUTER JOIN "EXPERIMENTSUITE" EXPERIMENTSUITE ON EXPERIMENT."EXPERIMENTSUITE_EXPERIMENTSUITEID"
      = EXPERIMENTSUITE."EXPERIMENTSUITEID"]]>
+=======
+     EXPERIMENT."AVERAGEEXPERIMENTRUNTIME" AS EXPERIMENT_AVERAGEEXPERIMENTRUNTIME
+FROM
+     "EXPERIMENT" EXPERIMENT LEFT OUTER JOIN "SYSTEM" SYSTEM ON EXPERIMENT."EXPERIMENTSET_SYSTEMID" = SYSTEM."SYSTEMID"
+     LEFT OUTER JOIN "EXPERIMENTSUITE" EXPERIMENTSUITE ON EXPERIMENT."EXPERIMENTSET_EXPERIMENTSUITEID" = EXPERIMENTSUITE."EXPERIMENTSUITEID"
+WHERE
+     EXPERIMENT.NAME LIKE '%men14%' AND ExperimentSuite.name LIKE '%200G%']]>
+>>>>>>> remotes/origin/master
 		</queryString>
 		<field name="EXPERIMENT_NAME" class="java.lang.String"/>
 		<field name="EXPERIMENTSUITE_NAME" class="java.lang.String"/>
 		<field name="SYSTEM_NAME" class="java.lang.String"/>
+<<<<<<< HEAD
 		<field name="EXPERIMENT_MEDIANEXPERIMENTRUNTIME" class="java.lang.Long"/>
 		<field name="EXPERIMENT_AVERAGEEXPERIMENTRUNTIME" class="java.lang.Long"/>
 		<field name="DATASETNAME" class="java.lang.String"/>
 		<field name="DEGREEOFPARALLISM" class="java.lang.String"/>
 		<field name="MEMORYSIZE" class="java.lang.String"/>
+=======
+		<field name="EXPERIMENT_AVERAGEEXPERIMENTRUNTIME" class="java.lang.Long"/>
+>>>>>>> remotes/origin/master
 	</subDataset>
 	<subDataset name="EventRunFixDop=320" uuid="381d5db7-f4a5-42be-b955-a7323843e17d">
 		<queryString>
@@ -118,6 +135,7 @@ FROM
      EXPERIMENT."NAME" AS EXPERIMENT_NAME,
      EXPERIMENTSUITE."NAME" AS EXPERIMENTSUITE_NAME,
      SYSTEM."NAME" AS SYSTEM_NAME,
+<<<<<<< HEAD
      Runtime,
      @t1 as rows
 FROM
@@ -132,12 +150,19 @@ FROM
                               WHERE EXPERIMENT.NAME LIKE '%.dop320.%'
                               )
       )
+=======
+     EXPERIMENT."AVERAGEEXPERIMENTRUNTIME" AS EXPERIMENT_AVERAGEEXPERIMENTRUNTIME
+FROM
+     "EXPERIMENT" EXPERIMENT LEFT OUTER JOIN "SYSTEM" SYSTEM ON EXPERIMENT."EXPERIMENTSET_SYSTEMID" = SYSTEM."SYSTEMID"
+     LEFT OUTER JOIN "EXPERIMENTSUITE" EXPERIMENTSUITE ON EXPERIMENT."EXPERIMENTSET_EXPERIMENTSUITEID" = EXPERIMENTSUITE."EXPERIMENTSUITEID"
+>>>>>>> remotes/origin/master
 WHERE
      EXPERIMENT.NAME LIKE '%.dop320.%']]>
 		</queryString>
 		<field name="EXPERIMENT_NAME" class="java.lang.String"/>
 		<field name="EXPERIMENTSUITE_NAME" class="java.lang.String"/>
 		<field name="SYSTEM_NAME" class="java.lang.String"/>
+<<<<<<< HEAD
 		<field name="RUNTIME" class="java.lang.Long"/>
 		<field name="ROWS" class="java.lang.Double"/>
 	</subDataset>
@@ -180,6 +205,9 @@ Group By Experiment.ExperimentID]]>
 		<field name="NAME" class="java.lang.String">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
+=======
+		<field name="EXPERIMENT_AVERAGEEXPERIMENTRUNTIME" class="java.lang.Long"/>
+>>>>>>> remotes/origin/master
 	</subDataset>
 	<queryString>
 		<![CDATA[SELECT

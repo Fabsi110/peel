@@ -1,4 +1,5 @@
 EXPERIMENT_NAME,EXPERIMENTSUITE_NAME,SYSTEM_NAME,EXPERIMENT_AVERAGEEXPERIME
+<<<<<<< HEAD
 flink.dop320.mem14G,pagerank.dbpedia.wally,flink,28971
 spark.dop320.mem14G,pagerank.dbpedia.wally,spark,84629
 flink.dop320.mem14G,pagerank.flickr.wally,flink,21925
@@ -15,3 +16,11 @@ EXPERIMENT_NAME,EXPERIMENTSUITE_NAME,SYSTEM_NAME,EXPERIMENT_AVERAGEEXPERIME
 spark.dop320.mem14G,pagerank.twitter.wally,spark,972518
 spark.dop320.mem5G,pagerank.twitter.wally,spark,980345
 spark.dop320.mem8G,pagerank.twitter.wally,spark,837488
+=======
+flink.dop160.men14G,tpch3.200G.wally,flink,62323
+flink.dop320.men14G,tpch3.200G.wally,flink,38145
+flink.dop80.men14G,tpch3.200G.wally,flink,120512
+spark.dop160.men14G,tpch3.200G.wally,spark,337094
+spark.dop320.men14G,tpch3.200G.wally,spark,171650
+spark.dop80.men14G,tpch3.200G.wally,spark,648646
+>>>>>>> remotes/origin/master
